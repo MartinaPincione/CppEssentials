@@ -1,0 +1,48 @@
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+/*
+  https://hackingcpp.com/cpp/tools/testing_frameworks.html
+ */
+
+#include "doctest.h"
+#include "prefix_sum.h"
+
+int nums_1[] = {2, -3, 3, 2};
+   //prefix sum is not non negative bc 2 + -3 = -1 so false
+int nums_2[] = {1, 1, -1, -1};
+   //prefix sum is both positive and 0 so non-negative is true
+int nums_3[] = {90, -1, -2, -9};
+   //prefix sum is always positive so non-negative is true
+int nums_4[] = {-2};
+   //prefix sum is always negative so non-negative is false 
+int nums_5[] = {0};
+   //prefix sum is zero so non-negative is true
+int nums_6[] = {-1, -1, 1, 1};
+   //prefix sum is either negative or zero so non-negative is false
+int nums_7[] = {9};
+
+
+
+
+TEST_CASE("Testing assignment 2 functions"){
+ 
+  SUBCASE("non_negative_sum"){
+    CHECK(non_negative_sum(nums_1, sizeof(nums_1)/sizeof(nums_1[0])) == false);
+    CHECK(non_negative_sum(nums_2, sizeof(nums_2)/sizeof(nums_2[0])) == true);
+    CHECK(non_negative_sum(nums_3, sizeof(nums_3)/sizeof(nums_3[0])) == true);
+    CHECK(non_negative_sum(nums_4, sizeof(nums_4)/sizeof(nums_4[0])) == false);
+    CHECK(non_negative_sum(nums_5, sizeof(nums_5)/sizeof(nums_5[0])) == true);
+    CHECK(non_negative_sum(nums_6, sizeof(nums_6)/sizeof(nums_6[0])) == false);
+    CHECK(non_negative_sum(nums_7, sizeof(nums_7)/sizeof(nums_7[0])) == true);
+
+  };
+
+  SUBCASE("non_positive_sum"){
+    CHECK(non_positive_sum(nums_1, sizeof(nums_1)/sizeof(nums_1[0])) == false);
+    CHECK(non_positive_sum(nums_2, sizeof(nums_2)/sizeof(nums_2[0])) == true);
+    CHECK(non_positive_sum(nums_3, sizeof(nums_3)/sizeof(nums_3[0])) == false);
+    CHECK(non_positive_sum(nums_4, sizeof(nums_4)/sizeof(nums_4[0])) == true);
+    CHECK(non_positive_sum(nums_5, sizeof(nums_5)/sizeof(nums_5[0])) == true);
+    CHECK(non_positive_sum(nums_6, sizeof(nums_6)/sizeof(nums_6[0])) == true);
+    CHECK(non_positive_sum(nums_7, sizeof(nums_7)/sizeof(nums_7[0])) == false);
+  };
+}
